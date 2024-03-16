@@ -11,8 +11,8 @@ typedef struct{
     typedef struct items Armor;
 }ArmorShop;
 
-void PilihWeapon(int PilihanWeapon, WeaponShop MilihWeapon){
-
+void PilihWeapon(int PilihanWeapon, WeaponShop MilihWeapon[]){
+    switch (pilihan)
 }
 
 void PilihArmor(){
@@ -24,6 +24,7 @@ int MainSHOP(){
     WeaponShop *MilihWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
     ArmorShop *MilihArmor = (ArmorShop*)malloc(sizeof(ArmorShop));
     scanf("%d", &PilihanArmorWeapon);
+    
     switch (PilihanArmorWeapon){
         case 1 : 
             scanf("PilihanWeapon");
@@ -31,6 +32,9 @@ int MainSHOP(){
             break;
         case 2 : 
             scanf("PilihanArmor");
+            break;
+        default :
+            printf("Pilihan anda salah silahkan masukkan ulang");
             break;
     }   
 }
