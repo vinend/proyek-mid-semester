@@ -17,7 +17,8 @@ typedef struct itemsTypes{
     float dps;
     float durability;
     char description[500];
-    char type[500];
+    char type[300];
+    char name{300}
 
 } items;
 
@@ -30,5 +31,5 @@ typedef struct itemInventory {
 
 
 int main() {
-    
+
 }
