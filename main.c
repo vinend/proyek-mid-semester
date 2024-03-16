@@ -23,23 +23,23 @@ struct itemInventory{
     struct itemsTypes *items; 
 };
 
-void viewInventory(struct itemInventory player) {
-    printf("Jumlah uang yang dimiliki : %.2f\n", player.money);
-    printf("Carry weight tersisa: %d\n", player.carryLoad); 
+void viewInventory(struct itemInventory *player) {
+    printf("Jumlah uang yang dimiliki : %.2f\n", player->money);
+    printf("Carry weight tersisa: %d\n", player->carryLoad); 
 
-    if(player.numberOfItems == 0) {
+    if(player->numberOfItems == 0) {
         printf("Anda Saat Ini Tidak Punya Item!\n");
         return;
     }
 
-    for(int i = 0; i < player.numberOfItems; i++) {
+    for(int i = 0; i < player->numberOfItems; i++) {
         
-        if(strcmp(player.items[i].type, "Weapon") == 0) {
-            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].dps, player.items[i].description);
-        } else if(strcmp(player.items[i].type, "Armor") == 0) {
-            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].durability, player.items[i].description);
+        if(strcmp(player->items[i].type, "Weapon") == 0) {
+            printf("%s %s %.2f %s\n", player->items[i].name, player->items[i].type, player->items[i].dps, player->items[i].description);
+        } else if(strcmp(player->items[i].type, "Armor") == 0) {
+            printf("%s %s %.2f %s\n", player->items[i].name, player->items[i].type, player->items[i].durability, player->items[i].description);
         } else {
-            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].effectDuration, player.items[i].description);
+            printf("%s %s %.2f %s\n", player->items[i].name, player->items[i].type, player->items[i].effectDuration, player->items[i].description);
         }
     }
 }
