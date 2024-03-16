@@ -10,24 +10,24 @@
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
+#include "MainShop.h"
 
-typedef struct itemsTypes{
+typedef struct{
     float weights;
     float price;
     float dps;
     float durability;
     char description[500];
     char type[300];
-    char name{300}
+    char name[300];
+}items;
 
-} items;
-
-typedef struct itemInventory {
+typedef struct{
     int money;
     int carryLoad;
     int numberOfItems;
     items *items;
-} inventory;
+}inventory;
 
 
 int main() {
