@@ -31,5 +31,40 @@ typedef struct itemInventory {
 
 
 int main() {
+    int trigger = 0, pilihan;
 
+    inventory player, shop;
+
+    do { 
+        system("cls");
+        printf("\n");
+        printf(" +-------------------------------------------------+\n");
+        printf(" |         SELAMAT DATANG DI SHOP SENJATA LIYUE    |\n");
+        printf(" +-------------------------------------------------+\n");
+        printf(" | No. |                Description                |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  1  | View Inventory                            |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  2  | Beli Senjata                              |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  3  | Sorting Inventory                         |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  4  | Searching Inventory                       |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  5  | Exit Program                              |\n");
+        printf(" +-----+-------------------------------------------+\n");
+
+        printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
+
+        switch(pilihan) {
+            case 1 :
+            
+            case 2 :
+            
+            case 3 :
+
+            case 4 :
+        }
+    } while(trigger == 0);
+    
 }
