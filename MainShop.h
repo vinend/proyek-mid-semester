@@ -2,29 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include "struct.h"
 
 typedef struct{
-    typedef struct items Sword;
+    items Sword;
 }WeaponShop;
 
 typedef struct{
-    typedef struct items Armor;
+    items Armor;
 }ArmorShop;
 
 void PilihWeapon(int PilihanWeapon, WeaponShop MilihWeapon[]){
-    switch (pilihan)
+
 }
 
 void PilihArmor(){
 
 }
 
-int MainSHOP(){
+int MainSHOP(inventory Player){
     int PilihanArmorWeapon, PilihanWeapon, PilihanArmor;
     WeaponShop *MilihWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
     ArmorShop *MilihArmor = (ArmorShop*)malloc(sizeof(ArmorShop));
     scanf("%d", &PilihanArmorWeapon);
-    
     switch (PilihanArmorWeapon){
         case 1 : 
             scanf("PilihanWeapon");
@@ -32,9 +32,6 @@ int MainSHOP(){
             break;
         case 2 : 
             scanf("PilihanArmor");
-            break;
-        default :
-            printf("Pilihan anda salah silahkan masukkan ulang");
             break;
     }   
 }

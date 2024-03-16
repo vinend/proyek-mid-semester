@@ -12,28 +12,10 @@
 #include <ctype.h>
 #include "MainShop.h"
 
-typedef struct{
-    float weights;
-    float price;
-    float dps;
-    float durability;
-    char description[500];
-    char type[300];
-    char name[300];
-}items;
-
-typedef struct{
-    int money;
-    int carryLoad;
-    int numberOfItems;
-    items *items;
-}inventory;
-
-
 int main() {
     int trigger = 0, pilihan;
 
-    inventory player, shop;
+    inventory *Player = (inventory*)malloc(sizeof(inventory));
 
     do { 
         system("cls");
@@ -59,7 +41,8 @@ int main() {
         switch(pilihan) {
             case 1 :
             
-            case 2 :
+            case 2 : mainSHOP(Player);
+            break;
             
             case 3 :
 
