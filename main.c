@@ -16,19 +16,44 @@ typedef struct itemsTypes{
     float price;
     float dps;
     float durability;
+    float effectTime;
     char description[500];
     char type[300];
-    char name{300}
+    char name[300];
 
 } items;
 
 typedef struct itemInventory {
-    int money;
+    float money;
     int carryLoad;
     int numberOfItems;
     items *items;
 } inventory;
 
+void viewInventory(inventory player) {
+    printf("Jumlah uang yang dimiliki : %.2f\n", player.money);
+    printf("Carry weight tersisa: %.2f\n", player.carryLoad);
+
+    if(player.numberOfItems == 0) {
+        printf("Anda Saat Ini Tidak Punya Item!");
+        return;
+    }
+
+    for(int i = 0; i < player.numberOfItems; i++) {
+
+        if(strcpy(player.items[i].type, "Weapon") ) {
+            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].dps, player.items[i].description);
+        }
+
+        else if(strcpy(player.items[i].type, "Armor")) {
+            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].durability, player.items[i].description);
+        }
+
+        else {
+            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].effectTime, player.items[i].description);
+        }
+    }
+}
 
 int main() {
     int trigger = 0, pilihan;
@@ -39,13 +64,13 @@ int main() {
         system("cls");
         printf("\n");
         printf(" +-------------------------------------------------+\n");
-        printf(" |         SELAMAT DATANG DI SHOP SENJATA LIYUE    |\n");
+        printf(" |         SELAMAT DATANG DI SHOP ITEM LIYUE       |\n");
         printf(" +-------------------------------------------------+\n");
         printf(" | No. |                Description                |\n");
         printf(" +-----+-------------------------------------------+\n");
-        printf(" |  1  | View Inventory                            |\n");
+        printf(" |  1  | Shop for Items                            |\n");
         printf(" +-----+-------------------------------------------+\n");
-        printf(" |  2  | Beli Senjata                              |\n");
+        printf(" |  2  | View Inventory                            |\n");
         printf(" +-----+-------------------------------------------+\n");
         printf(" |  3  | Sorting Inventory                         |\n");
         printf(" +-----+-------------------------------------------+\n");
@@ -57,7 +82,7 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 :
+            case 1 : viewInventory(player);
             
             case 2 :
             
