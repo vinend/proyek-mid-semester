@@ -19,8 +19,9 @@ void PilihArmor(){
 
 }
 
-int MainSHOP(){
+int MainSHOP(inventory *player, inventory *shop){
     int PilihanArmorWeapon, PilihanWeapon, PilihanArmor;
+
     WeaponShop *MilihWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
     ArmorShop *MilihArmor = (ArmorShop*)malloc(sizeof(ArmorShop));
     scanf("%d", &PilihanArmorWeapon);

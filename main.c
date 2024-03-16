@@ -1,17 +1,11 @@
-// Program Management Inventory dalam Game RPG
-// Kelompok 2 :
-// 1. Andi Muhammad Alvin Farhansyah 2306161933
-// 2. Alexander Christhian 2306267025
-
-// Versi 1.0
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
+#include "MainShop.h"
 
-typedef struct itemsTypes{
+struct itemsTypes{
     float weights;
     float price;
     float dps;
@@ -20,45 +14,41 @@ typedef struct itemsTypes{
     char description[500];
     char type[300];
     char name[300];
+};
 
-} items;
-
-typedef struct itemInventory {
+struct itemInventory {
     float money;
     int carryLoad;
     int numberOfItems;
-    items *items;
-} inventory;
+    struct itemsTypes *items; 
+};
 
-void viewInventory(inventory player) {
+void viewInventory(struct itemInventory player) {
     printf("Jumlah uang yang dimiliki : %.2f\n", player.money);
-    printf("Carry weight tersisa: %.2f\n", player.carryLoad);
+    printf("Carry weight tersisa: %d\n", player.carryLoad); 
 
     if(player.numberOfItems == 0) {
-        printf("Anda Saat Ini Tidak Punya Item!");
+        printf("Anda Saat Ini Tidak Punya Item!\n");
         return;
     }
 
     for(int i = 0; i < player.numberOfItems; i++) {
-
-        if(strcpy(player.items[i].type, "Weapon") ) {
-            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].dps, player.items[i].description);
-        }
-
-        else if(strcpy(player.items[i].type, "Armor")) {
-            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].durability, player.items[i].description);
-        }
-
-        else {
-            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].effectDuration, player.items[i].description);
+        
+        if(strcmp(player.items[i].type, "Weapon") == 0) {
+            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].dps, player.items[i].description);
+        } else if(strcmp(player.items[i].type, "Armor") == 0) {
+            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].durability, player.items[i].description);
+        } else {
+            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].effectDuration, player.items[i].description);
         }
     }
 }
 
+
 int main() {
     int trigger = 0, pilihan;
 
-    inventory player, shop;
+    struct itemInventory player, shop;
 
     do { 
         system("cls");
@@ -82,9 +72,9 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 : viewInventory(player);
+            case 1 : MainSHOP(&player, &shop);
             
-            case 2 :
+            case 2 : viewInventory(player);
             
             case 3 :
 
