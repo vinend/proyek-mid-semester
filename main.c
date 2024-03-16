@@ -10,33 +10,25 @@
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
-#include "MainShop.h"
 
-typedef struct{
+typedef struct itemsTypes{
     float weights;
     float price;
     float dps;
     float durability;
-    float effectTime;
+    float effectDuration;
     char description[500];
     char type[300];
     char name[300];
-<<<<<<< HEAD
 
 } items;
 
 typedef struct itemInventory {
     float money;
-=======
-}items;
-
-typedef struct{
-    int money;
->>>>>>> 62107cdceebecda24e9119ad6f5674bdc2ad40c3
     int carryLoad;
     int numberOfItems;
     items *items;
-}inventory;
+} inventory;
 
 void viewInventory(inventory player) {
     printf("Jumlah uang yang dimiliki : %.2f\n", player.money);
@@ -58,7 +50,7 @@ void viewInventory(inventory player) {
         }
 
         else {
-            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].effectTime, player.items[i].description);
+            printf("%s %s %.2f %.2f %s", player.items[i].name, player.items[i].type, player.items[i].effectDuration, player.items[i].description);
         }
     }
 }
