@@ -26,13 +26,17 @@ int MainSHOP(struct itemInventory* player){
     WeaponShop *MilihWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
     ArmorShop *MilihArmor = (ArmorShop*)malloc(sizeof(ArmorShop));
     scanf("%d", &PilihanArmorWeapon);
-    switch (PilihanArmorWeapon){
-        case 1 : 
-            scanf("PilihanWeapon");
+    scanf("%d", &PilihanArmorWeapon); // Correct usage of scanf
+    switch (PilihanArmorWeapon) {
+        case 1:
+            printf("Masukkan Pilihan Weapon: "); // Prompt for user input
+            scanf("%d", &PilihanWeapon); // Correct usage of scanf
             PilihWeapon(PilihanWeapon, MilihWeapon);
             break;
-        case 2 : 
-            scanf("PilihanArmor");
+        case 2:
+            printf("Masukkan Pilihan Armor: "); // Prompt for user input
+            scanf("%d", &PilihanArmor); // Correct usage of scanf
+            // Implementation of PilihArmor should be done here if necessary
             break;
-    }   
+    }
 }

@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <ctype.h>
 #include "MainShop.h"
+#include "ViewInventory.h"
 #include "struct.h"
 
 int main() {
