@@ -44,11 +44,40 @@ void viewInventory(struct itemInventory player) {
     }
 }
 
+void initializeShopItems(struct itemInventory *shop, int jumlahItem) {
+    shop->carryLoad = 100000;
+    shop->money = 10000;
+    shop->numberOfItems = jumlahItem;
+
+     shop->items = (struct itemsTypes*)malloc(sizeof(struct itemsTypes));
+
+     for(int i = 0; i < jumlahItem; i++) {
+        printf("Masukkan nama item: "); scanf(" %[^\n]", shop->items[i].name);
+        printf("Masukkan type item: "); scanf(" %[^\n]", shop->items[i].type);
+        printf("Masukkan Weight Items"); scanf("%f", shop->items[i].weights);
+        if(strcmp(shop->items[i].type, "Weapon") == 0) {
+            printf("Masukkan Damage Weapon: "); scanf("%f", shop->items[i].dps);
+        } else if(strcmp(shop->items[i].type, "Armor") == 0) {
+            printf("Masukkan Durability Armor: "); scanf("%f", shop->items[i].durability);
+        } else {
+            printf("Masukkan Durasi Potion: "); scanf("%f", shop->items[i].dps);
+        }
+        printf("Masukkan Deskripsi Singkat Item: "); scanf(" %[^\n]", shop->items[i].description);
+
+        system("cls");
+     }
+}
 
 int main() {
-    int trigger = 0, pilihan;
+    int trigger = 0, pilihan, jumlahItem;
 
     struct itemInventory player, shop;
+
+    printf("Berapa item yang diinginkan di shop?: "); scanf("%d", &jumlahItem);
+
+    system("cls");
+
+    initializeShopItems(&shop, jumlahItem);
 
     do { 
         system("cls");
