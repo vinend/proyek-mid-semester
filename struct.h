@@ -1,4 +1,7 @@
-typedef struct {
+#ifndef STRUCTCUSTOM
+#define STRUCTCUSTOM
+
+typedef struct itemTypes{
     float weights;
     float price;
     float dps;
@@ -15,3 +18,4 @@ struct itemInventory{
     int numberOfItems;
     itemsTypes *items; 
 };
+#endif
