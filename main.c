@@ -4,51 +4,12 @@
 #include <conio.h>
 #include <ctype.h>
 #include "MainShop.h"
-
-struct itemsTypes{
-    float weights;
-    float price;
-    float dps;
-    float durability;
-    float effectDuration;
-    char description[500];
-    char type[300];
-    char name[300];
-};
-
-struct itemInventory{
-    float money;
-    int carryLoad;
-    int numberOfItems;
-    struct itemsTypes *items; 
-};
-
-void viewInventory(struct itemInventory player) {
-    printf("Jumlah uang yang dimiliki : %.2f\n", player.money);
-    printf("Carry weight tersisa: %d\n", player.carryLoad); 
-
-    if(player.numberOfItems == 0) {
-        printf("Anda Saat Ini Tidak Punya Item!\n");
-        return;
-    }
-
-    for(int i = 0; i < player.numberOfItems; i++) {
-        
-        if(strcmp(player.items[i].type, "Weapon") == 0) {
-            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].dps, player.items[i].description);
-        } else if(strcmp(player.items[i].type, "Armor") == 0) {
-            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].durability, player.items[i].description);
-        } else {
-            printf("%s %s %.2f %s\n", player.items[i].name, player.items[i].type, player.items[i].effectDuration, player.items[i].description);
-        }
-    }
-}
-
+#include "struct.h"
 
 int main() {
     int trigger = 0, pilihan;
 
-    struct itemInventory player, shop;
+    struct itemInventory *player = malloc(sizeof(struct itemInventory));
 
     do { 
         system("cls");
@@ -71,15 +32,19 @@ int main() {
 
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
-        switch(pilihan) {
-            case 1 : MainSHOP(&player, &shop);
-            
-            case 2 : viewInventory(&player);
-            
-            case 3 :
-
-            case 4 :
+        switch (pilihan) {
+            case 1:
+                MainSHOP(player);
+                break;
+            case 2:
+                viewInventory(player);
+                break;
+            // Cases 3 and 4 need to be implemented
+            case 5:
+                trigger = 1; // Set trigger to exit loop
+                break;
+            // Implement a default case if needed
         }
-    } while(trigger == 0);
+    } while (trigger == 0);
     
 }

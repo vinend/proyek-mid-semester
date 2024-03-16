@@ -2,16 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include "struct.h"
 
 typedef struct{
-    typedef struct items Sword;
+    itemsTypes *Sword;
 }WeaponShop;
 
 typedef struct{
-    typedef struct items Armor;
+    itemsTypes *Armor;
 }ArmorShop;
 
-void PilihWeapon(int PilihanWeapon, WeaponShop MilihWeapon){
+void PilihWeapon(int PilihanWeapon, WeaponShop MilihWeapon[]){
 
 }
 
@@ -19,7 +20,7 @@ void PilihArmor(){
 
 }
 
-int MainSHOP(inventory *player, inventory *shop){
+int MainSHOP(struct itemInventory* player){
     int PilihanArmorWeapon, PilihanWeapon, PilihanArmor;
 
     WeaponShop *MilihWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
