@@ -16,7 +16,7 @@ struct itemsTypes{
     char name[300];
 };
 
-struct itemInventory {
+struct itemInventory{
     float money;
     int carryLoad;
     int numberOfItems;
@@ -74,7 +74,7 @@ int main() {
         switch(pilihan) {
             case 1 : MainSHOP(&player, &shop);
             
-            case 2 : viewInventory(player);
+            case 2 : viewInventory(&player);
             
             case 3 :
 
