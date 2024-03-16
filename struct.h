@@ -18,4 +18,16 @@ struct itemInventory{
     int numberOfItems;
     itemsTypes *items; 
 };
+
+typedef struct{
+    itemsTypes *Sword;
+    itemsTypes *Bow;
+}WeaponShop;
+
+typedef struct{
+    itemsTypes *Helmet;
+    itemsTypes *Vests;
+    itemsTypes *Leggings;
+    itemsTypes *Helmet;
+}ArmorShop;
 #endif

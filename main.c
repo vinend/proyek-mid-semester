@@ -5,16 +5,16 @@
 #include <ctype.h>
 #include "MainShop.h"
 #include "ViewInventory.h"
+#include "IsiMainShop.h"
 #include "struct.h"
 
 int main() {
     int trigger = 0, pilihan, jumlahItem;
 
+    WeaponShop *IsiWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
+    ArmorShop *IsiArmor = (ArmorShop*)malloc(sizeof(ArmorShop));
+    mainIsiShop(&IsiWeapon, &IsiArmor);
     struct itemInventory *player = malloc(sizeof(struct itemInventory));
-
-    printf("Berapa item yang diinginkan di shop?: "); scanf("%d", &jumlahItem);
-
-    system("cls");
 
     do { 
         system("cls");
