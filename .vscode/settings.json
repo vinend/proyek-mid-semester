@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "isimainshop.h": "c",
-        "viewinventory.h": "c"
+        "viewinventory.h": "c",
+        "typeinfo": "c",
+        "struct.h": "c",
+        "string.h": "c",
+        "conio.h": "c"
     }
 }

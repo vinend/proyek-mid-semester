@@ -2,22 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-#include <ctype.h>
 #include "MainShop.h"
-#include "ViewInventory.h"
 #include "IsiMainShop.h"
 #include "struct.h"
 
 int main() {
-    int trigger = 0, pilihan, jumlahItem;
-
-    struct itemInventory player, shop;
-
-    printf("Berapa item yang diinginkan di shop?: "); scanf("%d", &jumlahItem);
-
+    int trigger = 0, pilihan, jumlahItem = 0, i;
+    itemInventory *player = (itemInventory*)malloc(sizeof(itemInventory));
+    itemsTypes *Weapon =(itemsTypes*)malloc(sizeof(itemsTypes));
     system("cls");
 
-    initializeShopItems(&shop, jumlahItem);
+    mainIsiShop(&Weapon, &jumlahItem);
 
     do { 
         system("cls");
@@ -37,13 +32,13 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 : MainSHOP(&player);
-            
-            case 2 : viewInventory(&player);
-            
+            case 1 : MainSHOP(&player, Weapon);
+            break;
+            case 2 : 
+            break;
             case 3 :
-
-            case 4 :
+			break;
+            case 4 :break;
         }
     } while(trigger == 0);
     
