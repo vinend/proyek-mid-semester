@@ -216,15 +216,15 @@ void menuSortirInventory(struct itemInventory* player) {
     printf("Pilihan: "); scanf("%d", &pilihan); system("cls");
 
     switch(pilihan) {
-        case 1 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNama(&player, urutan);
+        case 1 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNama(&player, urutan); break;
 
-        case 2 : sortirTipeItem(&player);
+        case 2 : sortirTipeItem(&player); break;
 
-        case 3 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNilaiAtribut(&player, urutan);
+        case 3 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNilaiAtribut(&player, urutan); break;
 
-        case 4 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirBeratItem(&player, urutan);
+        case 4 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirBeratItem(&player, urutan); break;
 
-        case 5 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirHargaItem(&player, urutan);
+        case 5 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirHargaItem(&player, urutan); break;
     }
 
 }
@@ -263,8 +263,64 @@ void searchingNama(struct itemInventory* player, char namaItem) {
     printf("Press Any Button to Continue"); getch(); system("cls");
 }
 
+void searchingTipe(struct itemInventory* player, int pilihan) {
+
+    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
+    printf("--------------------------------------------------------------------------------\n");
+
+    if(pilihan == 1) {
+        for(int i = 0; i < player->numberOfItems; i++) {
+            if(strcmp(player->items[i].type, "Weapon") == 0) {
+                if(strcmp(player->items[i].type, "Weapon") == 0) {
+                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                }
+                else if(strcmp(player->items[i].type, "Armor") == 0) {
+                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
+                }
+                else {
+                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                }
+            }
+        }
+    }
+
+    
+    if(pilihan == 2) {
+        for(int i = 0; i < player->numberOfItems; i++) {
+            if(strcmp(player->items[i].type, "Armor") == 0) {
+                if(strcmp(player->items[i].type, "Weapon") == 0) {
+                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                }
+                else if(strcmp(player->items[i].type, "Armor") == 0) {
+                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
+                }
+                else {
+                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                }
+            }
+        }
+    }
+
+    
+    if(pilihan == 3) {
+        for(int i = 0; i < player->numberOfItems; i++) {
+            if(strcmp(player->items[i].type, "Other") == 0) {
+                if(strcmp(player->items[i].type, "Weapon") == 0) {
+                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                }
+                else if(strcmp(player->items[i].type, "Armor") == 0) {
+                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
+                }
+                else {
+                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                }
+            }
+        }
+    }
+}
+
 void searchingInventory(struct itemInventory* player) {
-    int pilihan, urutan;
+    int pilihan, pilihanType, urutan;
     char namaItem[100];
 
     system("cls");
@@ -288,9 +344,31 @@ void searchingInventory(struct itemInventory* player) {
     printf("Pilihan: "); scanf("%d", &pilihan); system("cls");
 
       switch(pilihan) {
-        case 1 : printf("Masukkan nama item: "); scanf(" %[^\n]", &namaItem); searchingNama(&player, namaItem);
+        case 1 : printf("Masukkan nama item: "); scanf(" %[^\n]", &namaItem); searchingNama(&player, namaItem); break;
 
-        case 2 : 
+        case 2 :
+        printf(" +-------------------------------------------------+\n");
+        printf(" |                  Search Item                    |\n");
+        printf(" +-------------------------------------------------+\n");
+        printf(" | No. |                Description                |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  1  | Weapon                                    |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  2  | Armor                                     |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf(" |  3  | Other                                     |\n");
+        printf(" +-----+-------------------------------------------+\n");
+        printf("Masukkkan Pilihan: "); scanf("%d", &pilihanType);
+
+        switch(pilihanType) {
+            case 1 : system("cls"); searchingTipe(&player, 1); system("cls"); break;
+
+            case 2 : system("cls"); searchingTipe(&player, 2); system("cls"); break;
+
+            case 3 : system("cls"); searchingTipe(&player, 3); system("cls"); break;
+        }
+
+        break;
 
         case 3 :
 
