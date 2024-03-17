@@ -11,10 +11,13 @@
 int main() {
     int trigger = 0, pilihan, jumlahItem;
 
-    WeaponShop *IsiWeapon = (WeaponShop*)malloc(sizeof(WeaponShop));
-    ArmorShop *IsiArmor = (ArmorShop*)malloc(sizeof(ArmorShop));
-    mainIsiShop(&IsiWeapon, &IsiArmor);
-    struct itemInventory *player = malloc(sizeof(struct itemInventory));
+    struct itemInventory player, shop;
+
+    printf("Berapa item yang diinginkan di shop?: "); scanf("%d", &jumlahItem);
+
+    system("cls");
+
+    initializeShopItems(&shop, jumlahItem);
 
     do { 
         system("cls");
@@ -28,28 +31,20 @@ int main() {
         printf(" +-----+-------------------------------------------+\n");
         printf(" |  2  | View Inventory                            |\n");
         printf(" +-----+-------------------------------------------+\n");
-        printf(" |  3  | Sorting Inventory                         |\n");
-        printf(" +-----+-------------------------------------------+\n");
-        printf(" |  4  | Searching Inventory                       |\n");
-        printf(" +-----+-------------------------------------------+\n");
-        printf(" |  5  | Exit Program                              |\n");
+        printf(" |  3  | Exit Program                              |\n");
         printf(" +-----+-------------------------------------------+\n");
 
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
-        switch (pilihan) {
-            case 1:
-                MainSHOP(player);
-                break;
-            case 2:
-                viewInventory(player);
-                break;
-            // Cases 3 and 4 need to be implemented
-            case 5:
-                trigger = 1; // Set trigger to exit loop
-                break;
-            // Implement a default case if needed
+        switch(pilihan) {
+            case 1 : MainSHOP(&player);
+            
+            case 2 : viewInventory(&player);
+            
+            case 3 :
+
+            case 4 :
         }
-    } while (trigger == 0);
+    } while(trigger == 0);
     
 }
