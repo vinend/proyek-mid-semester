@@ -7,13 +7,12 @@
 #include "struct.h"
 
 int main() {
-    int trigger = 0, pilihan, jumlahItem = 0, JumlahW = 0, JumlahA = 0, i;
+    int trigger = 0, pilihan, jumlahItem = 0, i;
     itemInventory *player = (itemInventory*)malloc(sizeof(itemInventory));
     itemsTypes *Weapon =(itemsTypes*)malloc(sizeof(itemsTypes));
-    itemsTypes *Armor =(itemsTypes*)malloc(sizeof(itemsTypes));
     system("cls");
 
-    mainIsiShop(&Weapon, &Armor, &JumlahW, &JumlahA);
+    mainIsiShop(&Weapon, &jumlahItem);
 
     do { 
         system("cls");
@@ -33,11 +32,11 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 : MainSHOP(&player, Weapon, Armor, JumlahW, JumlahA);
+            case 1 : MainSHOP(&player, &Weapon);
             break;
-            case 2 : 
+            case 2 : viewInventory(&player);
             break;
-            case 3 :
+            case 3 : 
 			break;
             case 4 :break;
         }
