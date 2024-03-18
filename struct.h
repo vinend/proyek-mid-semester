@@ -2,6 +2,7 @@
 #define STRUCTCUSTOM
 
 typedef struct {
+    int Kode;
     float weights;
     float price;
     float dps;

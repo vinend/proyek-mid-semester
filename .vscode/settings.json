@@ -5,6 +5,8 @@
         "typeinfo": "c",
         "struct.h": "c",
         "string.h": "c",
-        "conio.h": "c"
+        "conio.h": "c",
+        "mainshop.h": "c",
+        "stdio.h": "c"
     }
 }

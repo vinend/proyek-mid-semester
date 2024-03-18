@@ -1,2 +1,4 @@
-Pedang,24,23,12,Fuck Kehidupan
-Pedang,24,23,10,Fuck Kehidupan
+0,ADWLDWLd,12,1000,123,99,Item Dan 121
+0,LMAO,12,1000,123,99,Item 11 Mewwing
+1,Ifan,13,1222,132,55,Putih dan 222
+1,I2222n,13,1222,132,55,Putih 22 2111

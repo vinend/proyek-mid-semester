@@ -13,10 +13,13 @@ void PilihArmor(){
 }
 
 
-int MainSHOP(itemInventory *player[], itemsTypes Weapon[]){
+int MainSHOP(itemInventory *player[], itemsTypes Weapon[], itemsTypes Armor[], int JumlahW, int JumlahA){
     int PilihanArmorWeapon, PilihanWeapon, PilihanArmor;
-    for (int i = 0; i < 2; i++) {
-        printf("\nItem %d: Name: %s, DPS: %.2f\n", i, Weapon[i].name, Weapon[i].dps);
+    for (int i = 0; i < JumlahW; i++) {
+        printf("\n 1tem %d: Name: %s, Weights :%.2f, Price :%.2f, DPS: %.2f, Durability : %.2f, Desc : %s \n", i, Weapon[i].name, Weapon[i].weights, Weapon[i].price, Weapon[i].dps, Weapon[i].durability, Weapon[i].description);
+    }
+    for(int i = 0; i < JumlahA; i++){
+        printf("\n Nigger Item %d: Name: %s, Weights :%.2f, Price :%.2f, DPS: %.2f, Durability : %.2f, Desc : %s \n", i, Armor[i].name, Armor[i].weights, Armor[i].price, Armor[i].dps, Armor[i].durability, Armor[i].description);
     }
     scanf("%d", &PilihanArmorWeapon);
     scanf("%d", &PilihanArmorWeapon); // Correct usage of scanf
