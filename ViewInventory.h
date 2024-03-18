@@ -4,7 +4,7 @@
 #include <conio.h>
 #include "struct.h"
 
-void viewInventory(struct itemInventory* player) {
+void viewInventory(itemInventory* player) {
 
     int trigger = 0, pilihan;
 
@@ -31,7 +31,7 @@ void viewInventory(struct itemInventory* player) {
             printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
         }
         else {
-            printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+            printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
         }
     }
 
@@ -57,10 +57,9 @@ int itemTypePriority(const char* itemType) {
 float getItemPrimaryAttribute(const itemsTypes* item) {
     if(strcmp(item->type, "Weapon") == 0) return item->dps;
     else if(strcmp(item->type, "Armor") == 0) return item->durability;
-    else return item->effectDuration;
 }
 
-void sortirNama(struct itemInventory* player, int urutan) {
+void sortirNama(itemInventory* player, int urutan) {
 
     if(urutan = 1) {
         for(int i = 0; i < player->numberOfItems; i++) {
@@ -89,7 +88,7 @@ void sortirNama(struct itemInventory* player, int urutan) {
     }
 }
 
-void sortirTipeItem(struct itemInventory* player) {
+void sortirTipeItem(itemInventory* player) {
     for(int i = 0; i < player->numberOfItems; i++) {
         for(int j = 0; j < player->numberOfItems - 1 - i; j++) {
             int priorityCurrent = itemTypePriority(player->items[j].type);
@@ -107,7 +106,7 @@ void sortirTipeItem(struct itemInventory* player) {
     }
 }
 
-void sortirNilaiAtribut(struct itemInventory* player, int urutan) {
+void sortirNilaiAtribut(itemInventory* player, int urutan) {
 
     if(urutan == 1) {
     for(int i = 0; i < player->numberOfItems; i++) {
@@ -138,7 +137,7 @@ void sortirNilaiAtribut(struct itemInventory* player, int urutan) {
     }
 }
 
-void sortirBeratItem(struct itemInventory* player, int urutan) {
+void sortirBeratItem(itemInventory* player, int urutan) {
 
     if(urutan == 1) {
         for(int i = 0; i < player->numberOfItems; i++) {
@@ -165,7 +164,7 @@ void sortirBeratItem(struct itemInventory* player, int urutan) {
     }
 }
 
-void sortirHargaItem(struct itemInventory* player, int urutan) {
+void sortirHargaItem(itemInventory* player, int urutan) {
 
     if(urutan == 1) {
         for(int i = 0; i < player->numberOfItems; i++) {
@@ -192,7 +191,7 @@ void sortirHargaItem(struct itemInventory* player, int urutan) {
     }
 }
 
-void menuSortirInventory(struct itemInventory* player) {
+void menuSortirInventory(itemInventory* player) {
     int pilihan, urutan;
 
     system("cls");
@@ -235,7 +234,7 @@ void string_to_lower(char *str) {
     }
 }
 
-void searchingNama(struct itemInventory* player, char namaItem) {
+void searchingNama(itemInventory* player, char namaItem) {
     char namaItemLower[100];
 
     string_to_lower(namaItem);
@@ -255,7 +254,7 @@ void searchingNama(struct itemInventory* player, char namaItem) {
                 printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
             }
             else {
-                printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
             }
         }
     } 
@@ -263,7 +262,7 @@ void searchingNama(struct itemInventory* player, char namaItem) {
     printf("Press Any Button to Continue"); getch(); system("cls");
 }
 
-void searchingTipe(struct itemInventory* player, int pilihan) {
+void searchingTipe(itemInventory* player, int pilihan) {
 
     printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
     printf("--------------------------------------------------------------------------------\n");
@@ -278,7 +277,7 @@ void searchingTipe(struct itemInventory* player, int pilihan) {
                     printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
                 }
                 else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
                 }
             }
         }
@@ -295,7 +294,7 @@ void searchingTipe(struct itemInventory* player, int pilihan) {
                     printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
                 }
                 else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
                 }
             }
         }
@@ -312,14 +311,14 @@ void searchingTipe(struct itemInventory* player, int pilihan) {
                     printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
                 }
                 else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", player->items[i].effectDuration, player->items[i].description);
+                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
                 }
             }
         }
     }
 }
 
-void searchingInventory(struct itemInventory* player) {
+void searchingInventory(itemInventory* player) {
     int pilihan, pilihanType, urutan;
     char namaItem[100];
 
