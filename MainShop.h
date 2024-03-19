@@ -4,6 +4,30 @@
 #include <conio.h>
 #include "struct.h"
 
+void MasukkanDataWeapon(itemInventory *player[], itemsTypes Weapon[], int Weight, int NomorData, int i) {
+    // Assuming player[NomorData] is a valid pointer to an itemInventory and
+    // itemsTypes Weapon[] is an array of weapon structs.
+    int Beban, Harga;
+    Harga = Weapon[i-1].price;
+    Beban = Weapon[i-1].weights;
+    // Assuming player[NomorData]->items is an array within itemInventory.
+    player[NomorData]->items[i-1] = Weapon[i-1]; // Corrected pointer usage
+    player[NomorData]->carryLoad += Beban;
+    player[NomorData]->money -= Harga;
+    player[NomorData]->numberOfItems++;
+}
+
+void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
+    system("cls");
+    printf("Nama Weapon  : %s\n", Weapon->name);
+    printf("Berat Weapon : %.0f Kg\n", Weapon->weights);
+    printf("Harga Weapon : %.0f Dollar\n", Weapon->price);
+    printf("DPS Weapon   : %.0f \n", Weapon->dps);
+    printf("Desc Weapon : \n%s \n", Weapon->description);
+    printf("Apakah Anda ingin membeli Weapon ini ? (Yes = 1, No = 2)\n");
+    printf("Masukkan Pilihan Anda : ");
+}
+
 void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int Weight, int NomorData){
     int i, PilihanWeapon, PilihanBeli;
     system("cls");
@@ -57,22 +81,21 @@ void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int 
         }
 }
 
-void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
+void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
     system("cls");
-    printf("Nama Weapon  : %s\n", Weapon->name);
-    printf("Berat Weapon : %.0f Kg\n", Weapon->weights);
-    printf("Harga Weapon : %.0f Dollar\n", Weapon->price);
-    printf("DPS Weapon   : %.0f \n", Weapon->dps);
-    printf("Desc Weapon : \n%s \n", Weapon->description);
-    printf("Apakah Anda ingin membeli Weapon ini ? (Yes = 1, No = 2)\n");
+    printf("Nama Armor  : %s\n", Armor->name);
+    printf("Berat Armor : %.0f Kg\n", Armor->weights);
+    printf("Harga Armor : %.0f Dollar\n", Armor->price);
+    printf("DPS Armor   : %.0f \n", Armor->dps);
+    printf("Desc Armor : \n%s \n", Armor->description);
+    printf("Apakah Anda ingin membeli Armor ini ? (Yes = 1, No = 2, Back To Menu : 3)\n");
     printf("Masukkan Pilihan Anda : ");
 }
-
-void MasukkanDataWeapon(itemInventory *player[], itemsTypes Weapon[], int Weight, int NomorData, int i){
+void MasukkanDataArmor(itemInventory *player[], itemsTypes Armor[], int Weight, int NomorData, int i){
     int Beban, Harga;
-    Harga = Weapon[i-1].price;
-    Beban = Weapon[i-1].weights;
-    *player[NomorData]->items = Weapon[i-1];
+    Harga = Armor[i-1].price;
+    Beban = Armor[i-1].weights;
+    *player[NomorData]->items = Armor[i-1];
     player[NomorData]->carryLoad += Beban;
     player[NomorData]->money -= Harga;
     player[NomorData]->numberOfItems++;
@@ -128,27 +151,6 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
             goto PilihArmor;
         }
 }
-
-void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
-    system("cls");
-    printf("Nama Armor  : %s\n", Armor->name);
-    printf("Berat Armor : %.0f Kg\n", Armor->weights);
-    printf("Harga Armor : %.0f Dollar\n", Armor->price);
-    printf("DPS Armor   : %.0f \n", Armor->dps);
-    printf("Desc Armor : \n%s \n", Armor->description);
-    printf("Apakah Anda ingin membeli Armor ini ? (Yes = 1, No = 2, Back To Menu : 3)\n");
-    printf("Masukkan Pilihan Anda : ");
-}
-void MasukkanDataArmor(itemInventory *player[], itemsTypes Armor[], int Weight, int NomorData, int i){
-    int Beban, Harga;
-    Harga = Armor[i-1].price;
-    Beban = Armor[i-1].weights;
-    *player[NomorData]->items = Armor[i-1];
-    player[NomorData]->carryLoad += Beban;
-    player[NomorData]->money -= Harga;
-    player[NomorData]->numberOfItems++;
-}
-
 
 int MainSHOP(itemInventory *player[], itemsTypes Weapon[], itemsTypes Armor[], int JumlahW, int JumlahA, int Weight){
     int PilihanArmorWeapon, NomorData = 0;

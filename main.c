@@ -5,6 +5,7 @@
 #include "MainShop.h"
 #include "IsiMainShop.h"
 #include "struct.h"
+#include "ViewInventory.h"
 
 int main() {
     int trigger = 0, pilihan, jumlahItem = 0, JumlahW = 0, JumlahA = 0, i, Weight = 0;
@@ -15,7 +16,7 @@ int main() {
     player->numberOfItems = 0;
     player->carryLoad = 0;
     printf("Masukkan Jumlah Uang Anda : ");
-    scanf("%f", player->money);
+    scanf("%f", &player->money);
     system("cls");
 
     mainIsiShop(&Weapon, &Armor, &JumlahW, &JumlahA);
@@ -40,7 +41,7 @@ int main() {
         switch(pilihan) {
             case 1 : MainSHOP(&player, Weapon, Armor, JumlahW, JumlahA, Weight);
             break;
-            case 2 : viewInventory(&player);
+            case 2 : viewInventory(player);
             break;
             case 3 :
                 system("cls");

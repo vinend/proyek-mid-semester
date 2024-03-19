@@ -2,7 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include <ctype.h>
 #include "struct.h"
+int itemTypePriority(const char* itemType);
+float getItemPrimaryAttribute(const itemsTypes* item);
+void sortirNama(itemInventory* player, int urutan);
+void sortirTipeItem(itemInventory* player);
+void sortirNilaiAtribut(itemInventory* player, int urutan);
+void sortirBeratItem(itemInventory* player, int urutan);
+void sortirHargaItem(itemInventory* player, int urutan);
+void menuSortirInventory(itemInventory* player);
+void string_to_lower(char *str);
+void searchingNama(itemInventory* player, char* namaItem);
+void searchingTipe(itemInventory* player, int pilihan);
+int searchDPS(itemInventory* player);
+int searchDurability(itemInventory* player);
+int searchBerat(itemInventory* player);
+int searchHarga(itemInventory* player);
+void searchingInventory(itemInventory* player);
 
 void viewInventory(itemInventory *player) {
 
@@ -38,11 +55,12 @@ void viewInventory(itemInventory *player) {
     printf("1. Sort Items\n2.Search for Items\n3.Back To Main Menu\nPilihan: "); scanf("%d", &pilihan); system("cls");
 
     switch(pilihan) {
-        case 1 : menuSortirInventory(&player);
-
+        case 1 : menuSortirInventory(player);
+        break;
         case 2 :
-
+        break;
         case 3 : trigger++;
+        break;
     }
 
     } while(trigger == 0);
@@ -215,15 +233,15 @@ void menuSortirInventory(itemInventory* player) {
     printf("Pilihan: "); scanf("%d", &pilihan); system("cls");
 
     switch(pilihan) {
-        case 1 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNama(&player, urutan); break;
+        case 1 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNama(player, urutan); break;
 
-        case 2 : sortirTipeItem(&player); break;
+        case 2 : sortirTipeItem(player); break;
 
-        case 3 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNilaiAtribut(&player, urutan); break;
+        case 3 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirNilaiAtribut(player, urutan); break;
 
-        case 4 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirBeratItem(&player, urutan); break;
+        case 4 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirBeratItem(player, urutan); break;
 
-        case 5 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirHargaItem(&player, urutan); break;
+        case 5 : printf("Ascending / Descending? (1 / 0): "); scanf("%d", &urutan); sortirHargaItem(player, urutan); break;
     }
 
 }
@@ -234,7 +252,7 @@ void string_to_lower(char *str) {
     }
 }
 
-void searchingNama(itemInventory* player, char namaItem) {
+void searchingNama(itemInventory* player, char* namaItem) {
     char namaItemLower[100];
 
     string_to_lower(namaItem);
@@ -464,7 +482,12 @@ void searchingInventory(itemInventory* player) {
     printf("Pilihan: "); scanf("%d", &pilihan); system("cls");
 
       switch(pilihan) {
-        case 1 : printf("Masukkan nama item: "); scanf(" %[^\n]", &namaItem); searchingNama(&player, namaItem); break;
+        case 1 : // Correct usage when calling searchingNama
+        char namaItem[100]; // Ensure this declaration is present or correct in your code
+        printf("Masukkan nama item: "); scanf(" %[^\n]", namaItem);
+        searchingNama(player, namaItem); // Correctly pass namaItem as a string
+        break;
+
 
         case 2 :
         printf(" +-------------------------------------------------+\n");
@@ -481,11 +504,11 @@ void searchingInventory(itemInventory* player) {
         printf("Masukkkan Pilihan: "); scanf("%d", &pilihanType);
 
         switch(pilihanType) {
-            case 1 : system("cls"); searchingTipe(&player, 1); system("cls"); break;
+            case 1 : system("cls"); searchingTipe(player, 1); system("cls"); break;
 
-            case 2 : system("cls"); searchingTipe(&player, 2); system("cls"); break;
+            case 2 : system("cls"); searchingTipe(player, 2); system("cls"); break;
 
-            case 3 : system("cls"); searchingTipe(&player, 3); system("cls"); break;
+            case 3 : system("cls"); searchingTipe(player, 3); system("cls"); break;
         }
 
         break;
@@ -496,24 +519,24 @@ void searchingInventory(itemInventory* player) {
         printf(" +-------------------------------------------------+\n");
         printf(" | No. |                Description                |\n");
         printf(" +-----+-------------------------------------------+\n");
-        printf(" |  1  | Search by DPS                               |\n");
+        printf(" |  1  | Search by DPS                             |\n");
         printf(" +-----+-------------------------------------------+\n");
-        printf(" |  2  | Search By Durability                       |\n");
+        printf(" |  2  | Search By Durability                      |\n");
         printf(" +-----+-------------------------------------------+\n");
         printf("Masukkkan Pilihan: "); scanf("%d", &pilihanType);
 
         switch(pilihanType) {
-            case 1 : system("cls"); searchDPS(&player); system("cls"); break;
+            case 1 : system("cls"); searchDPS(player); system("cls"); break;
 
-            case 2 : system("cls"); searchDurability(&player); system("cls"); break;
+            case 2 : system("cls"); searchDurability(player); system("cls"); break;
 
         }
 
         break; 
 
-        case 4 : system("cls"); searchBerat(&player); system("cls"); break;
+        case 4 : system("cls"); searchBerat(player); system("cls"); break;
 
-        case 5 : system("cls"); searchHarga(&player); system("cls"); break;
+        case 5 : system("cls"); searchHarga(player); system("cls"); break;
     }
 
 }
