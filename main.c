@@ -8,18 +8,17 @@
 #include "ViewInventory.h"
 
 int main() {
-    int trigger = 0, pilihan, jumlahItem = 0, JumlahW = 0, JumlahA = 0, i, Weight = 0;
-    itemInventory *player = (itemInventory*)malloc(sizeof(itemInventory));
-    itemsTypes *Weapon =(itemsTypes*)malloc(sizeof(itemsTypes));
-    itemsTypes *Armor =(itemsTypes*)malloc(sizeof(itemsTypes));
+    int trigger = 0, pilihan, JumlahData = 0, i;
+    itemInventory *player=(itemInventory*)malloc(sizeof(itemInventory));;
     player->items = NULL;
+    itemsTypes *Data = (itemsTypes*)malloc(sizeof(itemsTypes));
     player->numberOfItems = 0;
     player->carryLoad = 150;
     printf("Masukkan Jumlah Uang Anda : ");
     scanf("%f", &player->money);
     system("cls");
 
-    mainIsiShop(&Weapon, &Armor, &JumlahW, &JumlahA);
+    mainIsiShop(&Data, &JumlahData);
 
     do { 
         system("cls");
@@ -39,7 +38,7 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 : MainSHOP(&player, Weapon, Armor, JumlahW, JumlahA, Weight);
+            case 1 : MainSHOP(player, Data, JumlahData);
             break;
             case 2 : viewInventory(player); getch();
             break;

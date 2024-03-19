@@ -4,21 +4,28 @@
 #include <conio.h>
 #include "struct.h"
 
-void MasukkanDataWeapon(itemInventory *player[], itemsTypes Weapon[], int Weight, int NomorData, int i) {
+void MasukkanDataWeapon(itemInventory *player, itemsTypes Weapon[], int i) {
     // Assuming player[NomorData] is a valid pointer to an itemInventory and
     // itemsTypes Weapon[] is an array of weapon structs.
     int Beban, Harga;
+    float dps;
     Harga = Weapon[i-1].price;
     Beban = Weapon[i-1].weights;
-    // Assuming player[NomorData]->items is an array within itemInventory.
-    player[NomorData]->items[i-1] = Weapon[i-1]; // Corrected pointer usage
-    player[NomorData]->carryLoad += Beban;
-    player[NomorData]->money -= Harga;
-    player[NomorData]->numberOfItems++;
-    NomorData++;
+    dps = Weapon[i-1].dps;
+    player->items = (itemsTypes*)realloc(player->items, (player->numberOfItems + 1) * sizeof(itemsTypes));
+    strcpy(player->items[player->numberOfItems].name, Weapon[i-1].name);
+    strcpy(player->items[player->numberOfItems].description, Weapon[i-1].description);
+    player->items[player->numberOfItems].dps = Weapon[i-1].dps; 
+    player->items[player->numberOfItems].durability = Weapon[i-1].durability;
+    player->items[player->numberOfItems].Kode = Weapon[i-1].Kode;
+    player->items[player->numberOfItems].price = Weapon[i-1].price;
+    player->items[player->numberOfItems].weights= Weapon[i-1].weights;
+    player->carryLoad += Beban;
+    player->money -= Harga;
+    player->numberOfItems++;
 }
 
-void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
+void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon){
     system("cls");
     printf("Nama Weapon  : %s\n", Weapon[PilihanWeapon-1].name);
     printf("Berat Weapon : %.0f Kg\n", Weapon[PilihanWeapon-1].weights);
@@ -29,7 +36,7 @@ void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
     printf("Masukkan Pilihan Anda : ");
 }
 
-void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int Weight, int NomorData){
+void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[]){
     int i, PilihanWeapon, PilihanBeli;
     PilihWeapon :
     system("cls");
@@ -62,12 +69,13 @@ void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int 
             case 4 :
             case 5 :
             case 6 :
-            TampilkanWeapon(Weapon, PilihanWeapon, Weight);
+            TampilkanWeapon(Weapon, PilihanWeapon);
             scanf("%d", &PilihanBeli);
             PilihBeli :
             switch (PilihanBeli){
-                case 1 :    
-                MasukkanDataWeapon(player, Weapon, Weight, NomorData, PilihanWeapon);
+                case 1 :
+                printf("nigga");   
+                MasukkanDataWeapon(player, Weapon, PilihanWeapon);
                 break;
                 case 2 : goto PilihWeapon;
                 break;
@@ -93,18 +101,20 @@ void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
     printf("Apakah Anda ingin membeli Armor ini ? (Yes = 1, No = 2, Back To Menu : 3)\n");
     printf("Masukkan Pilihan Anda : ");
 }
-void MasukkanDataArmor(itemInventory *player[], itemsTypes Armor[], int Weight, int NomorData, int i){
+void MasukkanDataArmor(itemInventory *player, itemsTypes Armor[], int i){
     int Beban, Harga;
     Harga = Armor[i-1].price;
     Beban = Armor[i-1].weights;
-    *player[NomorData]->items = Armor[i-1];
-    player[NomorData]->carryLoad += Beban;
-    player[NomorData]->money -= Harga;
-    player[NomorData]->numberOfItems++;
-    NomorData++;
+    strcpy(Armor[i-1].name, player->items[player->numberOfItems].name);
+    strcpy(Armor[i-1].description, player->items[player->numberOfItems].description);
+    player->items[player->numberOfItems].dps = Armor[i-1].dps; 
+    player->items[player->numberOfItems].durability = Armor[i-1].durability;
+    player->items[player->numberOfItems].Kode = Armor[i-1].Kode;
+    player->items[player->numberOfItems].price = Armor[i-1].price;
+    player->items[player->numberOfItems].weights= Armor[i-1].weights;
 }
 
-void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int Weight, int NomorData){
+void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[]){
     int i, PilihanArmor, PilihanBeli;
     PilihArmor :
     PilihanArmor = 0;
@@ -135,12 +145,12 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
             case 4 :
             case 5 :
             case 6 :
-            TampilkanWeapon(Armor, PilihanArmor, Weight);
+            TampilkanWeapon(Armor, PilihanArmor);
             scanf("%d", &PilihanBeli);
             PilihBeliArmor :
             switch (PilihanBeli){
                 case 1 :    
-                MasukkanDataWeapon(player, Armor, Weight, NomorData, PilihanArmor);
+                MasukkanDataWeapon(player, Armor, PilihanArmor);
                 break;
                 case 2 : goto PilihArmor;
                 break;
@@ -156,7 +166,7 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
         }
 }
 
-int MainSHOP(itemInventory *player[], itemsTypes Weapon[], itemsTypes Armor[], int JumlahW, int JumlahA, int Weight){
+int MainSHOP(itemInventory *player, itemsTypes Data[], int JumlahData){
     int PilihanArmorWeapon, NomorData = 0;
     ShopMenu :
         printf(" +-------------------------------------------------+\n");
@@ -174,11 +184,11 @@ int MainSHOP(itemInventory *player[], itemsTypes Weapon[], itemsTypes Armor[], i
     switch (PilihanArmorWeapon) {
         case 1:
             MilihWeapon : 
-            PilihWeapon(player, JumlahW, Weapon, Weight, NomorData);
+            PilihWeapon(player, JumlahData, Data);
             break;
         case 2:
             MilihArmor :
-            PilihArmor(player, JumlahA, Armor, Weight, NomorData);
+            PilihArmor(player, JumlahData, Data);
             break;
         case 3:
             break;
