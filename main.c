@@ -5,14 +5,17 @@
 #include "MainShop.h"
 #include "IsiMainShop.h"
 #include "struct.h"
+#include "ViewInventory.h"
+
 
 int main() {
-    int trigger = 0, pilihan, jumlahItem = 0, i;
+    int trigger = 0, pilihan, jumlahItem = 0, JumlahW = 0, JumlahA = 0, i;
     itemInventory *player = (itemInventory*)malloc(sizeof(itemInventory));
     itemsTypes *Weapon =(itemsTypes*)malloc(sizeof(itemsTypes));
-    system("cls");
-
-    mainIsiShop(&Weapon, &jumlahItem);
+    itemsTypes *Armor =(itemsTypes*)malloc(sizeof(itemsTypes));
+    player->items = NULL; // This is important!
+    player->numberOfItems = 0; // And this too!
+    mainIsiShop(&Weapon, &Armor, &JumlahW, &JumlahA);
 
     do { 
         system("cls");
@@ -32,7 +35,7 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 : MainSHOP(&player, &Weapon);
+            case 1 : MainSHOP(&player, Weapon, Armor, JumlahW, JumlahA);
             break;
             case 2 : viewInventory(&player);
             break;

@@ -10,17 +10,22 @@ void ProcessData(char *line, itemsTypes **Weapon, itemsTypes **Armor, int *Jumla
 
     if (result == 7) { // Successfully parsed all fields
         // Allocate or resize the items array based on Kode
-        itemsTypes *tempItems = (newItem.Kode == 0) ? realloc(*Weapon, (*JumlahW + 1) * sizeof(itemsTypes)) : realloc(*Armor, (*JumlahA + 1) * sizeof(itemsTypes));
-        if (!tempItems) {
-            perror("Unable to allocate memory");
-            exit(EXIT_FAILURE);
-        }
-
+        itemsTypes *tempItems = NULL;
         if (newItem.Kode == 0) {
+            tempItems = realloc(*Weapon, (*JumlahW + 1) * sizeof(itemsTypes));
+            if (!tempItems) {
+                perror("Unable to allocate memory for Weapon");
+                exit(EXIT_FAILURE);
+            }
             *Weapon = tempItems;
             (*Weapon)[*JumlahW] = newItem;
             (*JumlahW)++;
         } else {
+            tempItems = realloc(*Armor, (*JumlahA + 1) * sizeof(itemsTypes));
+            if (!tempItems) {
+                perror("Unable to allocate memory for Armor");
+                exit(EXIT_FAILURE);
+            }
             *Armor = tempItems;
             (*Armor)[*JumlahA] = newItem;
             (*JumlahA)++;
@@ -36,7 +41,6 @@ void mainIsiShop(itemsTypes **Weapon, itemsTypes **Armor,  int *JumlahW, int *Ju
         perror("Unable to open file");
         return;
     }
-
     char line[400];
     while (fgets(line, sizeof(line), file)) {
         ProcessData(line, Weapon, Armor, JumlahW, JumlahA);

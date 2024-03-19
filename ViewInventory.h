@@ -4,7 +4,7 @@
 #include <conio.h>
 #include "struct.h"
 
-void viewInventory(itemInventory* player) {
+void viewInventory(itemInventory *player) {
 
     int trigger = 0, pilihan;
 
