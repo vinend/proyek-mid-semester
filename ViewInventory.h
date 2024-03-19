@@ -31,7 +31,7 @@ void viewInventory(itemInventory *player) {
     printf("Carry weight tersisa: %.2f\n", player->carryLoad);
 
     if(player->numberOfItems == 0) {
-        printf("Anda Saat Ini Tidak Punya Item!");
+        printf("Anda Saat Ini Tidak Punya Item!\n");
         return;
     }
 
@@ -55,9 +55,9 @@ void viewInventory(itemInventory *player) {
     printf("1. Sort Items\n2.Search for Items\n3.Back To Main Menu\nPilihan: "); scanf("%d", &pilihan); system("cls");
 
     switch(pilihan) {
-        case 1 : menuSortirInventory(player);
+        case 1 : system("cls"); menuSortirInventory(player);
         break;
-        case 2 :
+        case 2 : system("cls"); searchingInventory(player);
         break;
         case 3 : trigger++;
         break;
@@ -482,10 +482,9 @@ void searchingInventory(itemInventory* player) {
     printf("Pilihan: "); scanf("%d", &pilihan); system("cls");
 
       switch(pilihan) {
-        case 1 : // Correct usage when calling searchingNama
-        char namaItem[100]; // Ensure this declaration is present or correct in your code
+        case 1 : 
         printf("Masukkan nama item: "); scanf(" %[^\n]", namaItem);
-        searchingNama(player, namaItem); // Correctly pass namaItem as a string
+        searchingNama(player, namaItem); 
         break;
 
 
