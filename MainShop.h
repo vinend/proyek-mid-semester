@@ -15,22 +15,25 @@ void MasukkanDataWeapon(itemInventory *player[], itemsTypes Weapon[], int Weight
     player[NomorData]->carryLoad += Beban;
     player[NomorData]->money -= Harga;
     player[NomorData]->numberOfItems++;
+    NomorData++;
 }
 
 void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
     system("cls");
-    printf("Nama Weapon  : %s\n", Weapon->name);
-    printf("Berat Weapon : %.0f Kg\n", Weapon->weights);
-    printf("Harga Weapon : %.0f Dollar\n", Weapon->price);
-    printf("DPS Weapon   : %.0f \n", Weapon->dps);
-    printf("Desc Weapon : \n%s \n", Weapon->description);
+    printf("Nama Weapon  : %s\n", Weapon[PilihanWeapon-1].name);
+    printf("Berat Weapon : %.0f Kg\n", Weapon[PilihanWeapon-1].weights);
+    printf("Harga Weapon : %.0f Dollar\n", Weapon[PilihanWeapon-1].price);
+    printf("DPS Weapon   : %.0f \n", Weapon[PilihanWeapon-1].dps);
+    printf("Desc Weapon : \n%s \n", Weapon[PilihanWeapon-1].description);
     printf("Apakah Anda ingin membeli Weapon ini ? (Yes = 1, No = 2)\n");
     printf("Masukkan Pilihan Anda : ");
 }
 
 void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int Weight, int NomorData){
     int i, PilihanWeapon, PilihanBeli;
+    PilihWeapon :
     system("cls");
+    PilihanWeapon = 0;
         printf(" +-------------------------------------------------+\n");
         printf(" |          PILIH SENJATA MEMATIKAN ANDA           |\n");
         printf(" +-------------------------------------------------+\n");
@@ -52,7 +55,6 @@ void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int 
         printf(" +-----+-------------------------------------------+\n");
         printf("Masukkan Pilihan Weapon: "); // Prompt for user input
         scanf("%d", &PilihanWeapon); // Correct usage of scanf
-        PilihWeapon :
         switch (PilihanWeapon){
             case 1 : 
             case 2 : 
@@ -65,7 +67,7 @@ void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int 
             PilihBeli :
             switch (PilihanBeli){
                 case 1 :    
-                MasukkanDataWeapon(player, Weapon, Weight, NomorData, PilihanBeli);
+                MasukkanDataWeapon(player, Weapon, Weight, NomorData, PilihanWeapon);
                 break;
                 case 2 : goto PilihWeapon;
                 break;
@@ -83,11 +85,11 @@ void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int 
 
 void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
     system("cls");
-    printf("Nama Armor  : %s\n", Armor->name);
-    printf("Berat Armor : %.0f Kg\n", Armor->weights);
-    printf("Harga Armor : %.0f Dollar\n", Armor->price);
-    printf("DPS Armor   : %.0f \n", Armor->dps);
-    printf("Desc Armor : \n%s \n", Armor->description);
+    printf("Nama Armor  : %s\n", Armor[PilihanArmor-1].name);
+    printf("Berat Armor : %.0f Kg\n", Armor[PilihanArmor-1].weights);
+    printf("Harga Armor : %.0f Dollar\n", Armor[PilihanArmor-1].price);
+    printf("DPS Armor   : %.0f \n", Armor[PilihanArmor-1].dps);
+    printf("Desc Armor : \n%s \n", Armor[PilihanArmor-1].description);
     printf("Apakah Anda ingin membeli Armor ini ? (Yes = 1, No = 2, Back To Menu : 3)\n");
     printf("Masukkan Pilihan Anda : ");
 }
@@ -99,10 +101,13 @@ void MasukkanDataArmor(itemInventory *player[], itemsTypes Armor[], int Weight, 
     player[NomorData]->carryLoad += Beban;
     player[NomorData]->money -= Harga;
     player[NomorData]->numberOfItems++;
+    NomorData++;
 }
 
 void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int Weight, int NomorData){
     int i, PilihanArmor, PilihanBeli;
+    PilihArmor :
+    PilihanArmor = 0;
     system("cls");
         printf(" +-------------------------------------------------+\n");
         printf(" |   PILIH ARMOR YANG KUAT UNTUK MELINDUNGI ANDA   |\n");
@@ -123,7 +128,6 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
         printf(" +-----+-------------------------------------------+\n");
         printf("Masukkan Pilihan Armor: "); // Prompt for user input
         scanf("%d", &PilihanArmor); // Correct usage of scanf
-        PilihArmor :
         switch (PilihanArmor){
             case 1 : 
             case 2 : 
@@ -136,7 +140,7 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
             PilihBeliArmor :
             switch (PilihanBeli){
                 case 1 :    
-                MasukkanDataWeapon(player, Armor, Weight, NomorData, PilihanBeli);
+                MasukkanDataWeapon(player, Armor, Weight, NomorData, PilihanArmor);
                 break;
                 case 2 : goto PilihArmor;
                 break;
