@@ -1,6 +1,7 @@
 #ifndef STRUCTCUSTOM
 #define STRUCTCUSTOM
 
+// Struct untuk satu item
 typedef struct {
     int Kode;
     float weights;
@@ -12,6 +13,7 @@ typedef struct {
     char name[300];
 }itemsTypes;
 
+// Struct untuk menyimpan suatu data untuk inventory
 typedef struct {
     float money;
     float carryLoad;

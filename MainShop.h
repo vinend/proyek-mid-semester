@@ -4,9 +4,12 @@
 #include <conio.h>
 #include "struct.h"
 
+// Function untuk memasukkan Data Weapon ke Data Player
 void MasukkanDataWeapon(itemInventory *player, itemsTypes Weapon[], int *Weight, int *NomorData, int i) {
     int Beban = Weapon[i-1].weights;
     int Harga = Weapon[i-1].price;
+
+    // Error Handling jika beban melebihi atau uang kurang dari barang yang dibeli
     if(*Weight + Beban > player->carryLoad){
         printf("Beban terlalu besar !\n");
         getch();
@@ -17,6 +20,8 @@ void MasukkanDataWeapon(itemInventory *player, itemsTypes Weapon[], int *Weight,
         getch();
         return;
     }
+
+    // Memasukkan data ke dalam Player
     player->items = (itemsTypes*)realloc(player->items, (player->numberOfItems + 1) * sizeof(itemsTypes));
     player->items[player->numberOfItems] = Weapon[i-1];
     *Weight += Beban;
@@ -25,6 +30,7 @@ void MasukkanDataWeapon(itemInventory *player, itemsTypes Weapon[], int *Weight,
     (*NomorData)++;
 }
 
+// Menampilkan Data Weapon
 void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
     system("cls");
     printf("Nama Weapon  : %s\n", Weapon[PilihanWeapon-1].name);
@@ -36,20 +42,21 @@ void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
     printf("Masukkan Pilihan Anda : ");
 }
 
+// Function untuk memilih Weapon
 void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[], int *Weight, int *NomorData){
     int PilihanWeapon, PilihanBeli;
     do {
         system("cls");
+
+        // Error Handling jika beban melebihi dari beban maksimum atau uang kurang dari 100
         if(*Weight > player->carryLoad){
-            printf("Beban melebihi max load !\n");
-            getch();
             return;
         }
         else if(player->money < 100){
-            printf("Uang tidak cukup !\n");
-            getch();
             return;
         }
+
+        // Print pilihan
         printf(" +-------------------------------------------------+\n");
         printf(" |          PILIH SENJATA MEMATIKAN ANDA           |\n");
         printf(" +-------------------------------------------------+\n");
@@ -71,6 +78,8 @@ void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[], int *W
         printf(" +-----+-------------------------------------------+\n");
         printf("Uang sekarang : %.2f\n", player->money);
         printf("Beban yang sisa sekarang : %.2f\n", player->carryLoad - *Weight);
+
+        // Memilih Pilihan Weapon
         scanf("%d", &PilihanWeapon);
         if(PilihanWeapon >= 1 && PilihanWeapon <= JumlahW) {
             TampilkanWeapon(Weapon, PilihanWeapon, *Weight);
@@ -94,6 +103,7 @@ void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[], int *W
     } while(PilihanWeapon != 7);
 }
 
+// Menampilkan Data Armor
 void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
     system("cls");
     printf("Nama Armor  : %s\n", Armor[PilihanArmor-1].name);
@@ -104,10 +114,14 @@ void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
     printf("Apakah Anda ingin membeli Armor ini ? (Yes = 1, No = 2, Back To Menu : 3)\n");
     printf("Masukkan Pilihan Anda : ");
 }
+
+// Function untuk memasukkan Data Armor ke Data Player
 void MasukkanDataArmor(itemInventory *player, itemsTypes Armor[], int *Weight, int NomorData, int i){
     int Beban, Harga;
     Harga = Armor[i-1].price;
     Beban = Armor[i-1].weights;
+
+    // Error Handling jika beban melebihi atau uang kurang dari barang yang dibeli
     if(*Weight + Beban > player->carryLoad){
         printf("Beban terlalu besar !\n");
         getch();
@@ -118,28 +132,31 @@ void MasukkanDataArmor(itemInventory *player, itemsTypes Armor[], int *Weight, i
         getch();
         return;
     }
+
+    // Memasukkan data ke dalam Player
     player->items = (itemsTypes*)realloc(player->items, (player->numberOfItems + 1) * sizeof(itemsTypes));
     player->items[player->numberOfItems] = Armor[i-1];
-    Weight += Beban;
+    *Weight += Beban;
     player->money -= Harga;
     player->numberOfItems++;
     NomorData++;
 }
 
+// Function untuk memilih Armor
 void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[], int *Weight, int NomorData){
     int PilihanArmor, PilihanBeli;
     do {
         system("cls");
+
+        // Error Handling jika beban melebihi dari beban maksimum atau uang kurang dari 100
         if(*Weight > player->carryLoad){
-            printf("Beban melebihi max load !\n");
-            getch();
             return;
         }
         else if(player->money < 100){
-            printf("Uang tidak cukup !\n");
-            getch();
             return;
         }
+
+        // Print pilihan
         printf(" +-------------------------------------------------+\n");
         printf(" |   PILIH ARMOR YANG KUAT UNTUK MELINDUNGI ANDA   |\n");
         printf(" +-------------------------------------------------+\n");
@@ -159,6 +176,8 @@ void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[], int *Wei
         printf(" +-----+-------------------------------------------+\n");
         printf("Uang sekarang : %.2f\n", player->money);
         printf("Beban yang sisa sekarang : %.2f\n", player->carryLoad - *Weight);
+
+        // Memilih Pilihan Armor
         scanf("%d", &PilihanArmor);
         if(PilihanArmor >= 1 && PilihanArmor <= JumlahA) {
             TampilkanArmor(Armor, PilihanArmor);
@@ -182,10 +201,13 @@ void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[], int *Wei
     } while(PilihanArmor != 6);
 }
 
+// Main untuk Header Shop
 int MainSHOP(itemInventory *player, itemsTypes Weapon[], itemsTypes Armor[], int JumlahW, int JumlahA, int Weight){
     int PilihanArmorWeapon, NomorData = 0;
     do{
         system("cls");
+
+        // Error Handling jika beban melebihi dari beban maksimum atau uang kurang dari 100
         if(Weight > player->carryLoad){
             printf("Beban melebihi maxload !");
             getch();
@@ -196,6 +218,8 @@ int MainSHOP(itemInventory *player, itemsTypes Weapon[], itemsTypes Armor[], int
             getch();
             break;
         }
+
+        // Print pilihan
         printf(" +-------------------------------------------------+\n");
         printf(" |                 Mau Beli Apa ?                  |\n");
         printf(" +-------------------------------------------------+\n");
@@ -207,7 +231,9 @@ int MainSHOP(itemInventory *player, itemsTypes Weapon[], itemsTypes Armor[], int
         printf(" +-----+-------------------------------------------+\n");
         printf(" |  3  | Back to Main Menu                         |\n");
         printf(" +-----+-------------------------------------------+\n");
-        scanf("%d", &PilihanArmorWeapon); // Correct usage of scanf
+
+        // Memilih Pilihan Armor atau Weapon
+        scanf("%d", &PilihanArmorWeapon); 
         switch (PilihanArmorWeapon) {
         case 1:
             MilihWeapon : 
