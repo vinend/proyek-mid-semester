@@ -29,13 +29,12 @@ void searchingInventory(itemInventory* player);
 
 // Function utama dalam header file ini, menu keseluruhan inventory management untuk player
 void viewInventory(itemInventory *player) {
-
     // Pendeklarasian int trigger dan pilihan untuk menginisiasi pemilihan dalam program dan juga trigger untuk mematikan fungsi utama header file ini
     int trigger = 0, pilihan;
 
     // Penunjukkan isi inventory pada player dalam while loop, yang akan berjalan terus menerus sampai trigger > 1
     do {
-    
+    system("cls");
     // Menunjukkan uang yang sedang dimiliki oleh player
     printf("Jumlah uang yang dimiliki : %.2f\n", player->money);
 
