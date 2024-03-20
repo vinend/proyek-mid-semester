@@ -112,15 +112,13 @@ void sortirNama(itemInventory* player, int urutan) {
 }
 
 void sortirTipeItem(itemInventory* player) {
-    for(int i = 0; i < player->numberOfItems; i++) {
-        for(int j = 0; j < player->numberOfItems - 1 - i; j++) {
+    for(int i = 0; i < player->numberOfItems - 1; i++) {
+        for(int j = 0; j < player->numberOfItems - i - 1; j++) {
             int priorityCurrent = itemTypePriority(player->items[j].type);
             int priorityNext = itemTypePriority(player->items[j + 1].type);
-
-            
-            int needSwap = (priorityCurrent > priorityNext) || (priorityCurrent == priorityNext && strcmp(player->items[j].name, player->items[j + 1].name) > 0);
-
-            if(needSwap) {
+            // Sort by type priority and, if equal, by name
+            if(priorityCurrent > priorityNext || 
+              (priorityCurrent == priorityNext && strcmp(player->items[j].name, player->items[j + 1].name) > 0)) {
                 itemsTypes temp = player->items[j];
                 player->items[j] = player->items[j + 1];
                 player->items[j + 1] = temp;
@@ -128,6 +126,7 @@ void sortirTipeItem(itemInventory* player) {
         }
     }
 }
+
 
 void sortirNilaiAtribut(itemInventory* player, int urutan) {
 
@@ -293,86 +292,34 @@ void searchingNama(itemInventory* player, char* namaItem) {
 }
 
 void searchingTipe(itemInventory* player, int pilihan) {
+    char* type = NULL;
+    switch(pilihan) {
+        case 1: type = "Weapon"; break;
+        case 2: type = "Armor"; break;
+        case 3: type = "Other"; break;
+    }
 
     printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
     printf("----------------------------------------------------------------------------------------------------------\n");
 
-    if(pilihan == 1) {
-        for(int i = 0; i < player->numberOfItems; i++) {
-            if(strcmp(player->items[i].type, "Weapon") == 0) {
-                char attributeString[20]; 
-                if(player->items[i].Kode == 0) { 
-                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
-                } else if(player->items[i].Kode == 1) { 
-                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
-                } else { 
-                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
-                }
-
-        
-                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
-                    player->items[i].name, 
-                    player->items[i].type, 
-                    attributeString, 
-                    player->items[i].weights, 
-                    player->items[i].price, 
-                    player->items[i].description);
-            }
-        }
-    }
-
-    
-    else if(pilihan == 2) {
-        for(int i = 0; i < player->numberOfItems; i++) {
-            if(strcmp(player->items[i].type, "Armor") == 0) {
-                char attributeString[20]; 
-                if(player->items[i].Kode == 0) { 
-                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
-                } else if(player->items[i].Kode == 1) { 
-                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
-                } else { 
-                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
-                }
-
-        
-                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
-                    player->items[i].name, 
-                    player->items[i].type, 
-                    attributeString, 
-                    player->items[i].weights, 
-                    player->items[i].price, 
-                    player->items[i].description);
-            }
-        }
-    }
-
-    
-    else if(pilihan == 3) {
-        for(int i = 0; i < player->numberOfItems; i++) {
-            if(strcmp(player->items[i].type, "Other") == 0) {
-                char attributeString[20]; 
-                if(player->items[i].Kode == 0) { 
-                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
-                } else if(player->items[i].Kode == 1) { 
-                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
-                } else { 
-                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
-                }
-
-        
-                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
-                    player->items[i].name, 
-                    player->items[i].type, 
-                    attributeString, 
-                    player->items[i].weights, 
-                    player->items[i].price, 
-                    player->items[i].description);
-            }
+    for(int i = 0; i < player->numberOfItems; i++) {
+        if(strcmp(player->items[i].type, type) == 0) {
+            char attributeString[20];
+            snprintf(attributeString, sizeof(attributeString), player->items[i].Kode == 0 ? "%.2f DPS" : "%.2f HP", 
+                     player->items[i].Kode == 0 ? player->items[i].dps : player->items[i].durability);
+            printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                player->items[i].name, 
+                player->items[i].type, 
+                attributeString, 
+                player->items[i].weights, 
+                player->items[i].price, 
+                player->items[i].description);
         }
     }
 
     printf("Press Any Button to Continue!"); getch(); system("cls");
 }
+
 
 int searchDPS(itemInventory* player) {
     float batasAtas, batasBawah;

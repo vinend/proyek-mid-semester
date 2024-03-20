@@ -4,7 +4,7 @@
 0,Fire Magma Sword,15,1800,8,0,Pedang ini dapat membakar musuh dengan kekuatannya. Namun pedang ini juga tidak memiliki ketajaman yang kuat.,Weapon
 0,Sword of Doom,30,7000,20,0,Pedang ini pernah dipakai dalam medan perang melawan kegelapan. Hanya yang terkuat dari yang terkuat dapat memakai pedang ini.,Weapon
 0,Umbrella,12,2500,10,0,Konon katanya hujan sangat lemah dengan senjata ini.,Weapon
-1,Leather Armor,4,150,0,3,Terbuat dari kulit beruang, tidak membantu banyak tetapi dapat berguna dalam combat ringan.,Armor
+1,Leather Armor,4,150,0,3,Terbuat dari kulit beruang. tidak membantu banyak tetapi dapat berguna dalam combat ringan.,Armor
 1,Iron Chain Armor,8,750,0,8,Ketahanan dari armor ini menjadi hal yang paling dinormalisasi dalam perang antar kerajaan.,Armor
 1,Dragon Skin Armor,16,3500,0,18,Kulit naga yang lebih keras dari emas manapun. Pedang biasa tidak dapat memotong armor ini.,Armor
 1,Shadow Armor,24,10000,0,30,Aura mistis menyelimuti armor ini. Konon katanya Armor ini dikirim dari raja dunia lain.,Armor
