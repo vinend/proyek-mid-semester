@@ -39,7 +39,7 @@ int main() {
         printf("Masukkan Pilihan: "); scanf("%d", &pilihan);
 
         switch(pilihan) {
-            case 1 : MainSHOP(&player, Weapon, Armor, JumlahW, JumlahA, Weight);
+            case 1 : MainSHOP(player, Weapon, Armor, JumlahW, JumlahA, Weight);
             break;
             case 2 : viewInventory(player); getch();
             break;

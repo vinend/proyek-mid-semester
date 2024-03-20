@@ -41,11 +41,11 @@ void viewInventory(itemInventory *player) {
     
     for(int i = 0; i < player->numberOfItems; i++) {
         
-        if(strcmp(player->items[i].type, "Weapon") == 0) {
-            printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+        if(player->items[i].Kode == 0) {
+            printf("%-20s %-10s %-20.2fDPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
         }
-        else if(strcmp(player->items[i].type, "Armor") == 0) {
-            printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
+        else if(player->items[i].Kode == 1) {
+            printf("%-20s %-10s %-20.2fHP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
         }
         else {
             printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);

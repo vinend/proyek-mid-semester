@@ -4,17 +4,18 @@
 #include <conio.h>
 #include "struct.h"
 
-void MasukkanDataWeapon(itemInventory *player[], itemsTypes Weapon[], int Weight, int NomorData, int i) {
+void MasukkanDataWeapon(itemInventory *player, itemsTypes Weapon[], int Weight, int NomorData, int i) {
     // Assuming player[NomorData] is a valid pointer to an itemInventory and
     // itemsTypes Weapon[] is an array of weapon structs.
     int Beban, Harga;
     Harga = Weapon[i-1].price;
     Beban = Weapon[i-1].weights;
+    player->items = (itemsTypes*)realloc(player->items, (player->numberOfItems + 1) * sizeof(itemsTypes));
     // Assuming player[NomorData]->items is an array within itemInventory.
-    player[NomorData]->items[i-1] = Weapon[i-1]; // Corrected pointer usage
-    player[NomorData]->carryLoad += Beban;
-    player[NomorData]->money -= Harga;
-    player[NomorData]->numberOfItems++;
+    player->items[player->numberOfItems] = Weapon[i-1]; // Corrected pointer usage
+    player->carryLoad += Beban;
+    player->money -= Harga;
+    player->numberOfItems++;
     NomorData++;
 }
 
@@ -29,7 +30,7 @@ void TampilkanWeapon(itemsTypes Weapon[], int PilihanWeapon, int Weight){
     printf("Masukkan Pilihan Anda : ");
 }
 
-void PilihWeapon(itemInventory *player[], int JumlahW, itemsTypes Weapon[], int Weight, int NomorData){
+void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[], int Weight, int NomorData){
     int i, PilihanWeapon, PilihanBeli;
     PilihWeapon :
     system("cls");
@@ -93,18 +94,19 @@ void TampilkanArmor(itemsTypes Armor[], int PilihanArmor){
     printf("Apakah Anda ingin membeli Armor ini ? (Yes = 1, No = 2, Back To Menu : 3)\n");
     printf("Masukkan Pilihan Anda : ");
 }
-void MasukkanDataArmor(itemInventory *player[], itemsTypes Armor[], int Weight, int NomorData, int i){
+void MasukkanDataArmor(itemInventory *player, itemsTypes Armor[], int Weight, int NomorData, int i){
     int Beban, Harga;
     Harga = Armor[i-1].price;
     Beban = Armor[i-1].weights;
-    *player[NomorData]->items = Armor[i-1];
-    player[NomorData]->carryLoad += Beban;
-    player[NomorData]->money -= Harga;
-    player[NomorData]->numberOfItems++;
+    player->items = (itemsTypes*)realloc(player->items, (player->numberOfItems + 1) * sizeof(itemsTypes));
+    player->items[player->numberOfItems] = Armor[i-1];
+    player->carryLoad += Beban;
+    player->money -= Harga;
+    player->numberOfItems++;
     NomorData++;
 }
 
-void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int Weight, int NomorData){
+void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[], int Weight, int NomorData){
     int i, PilihanArmor, PilihanBeli;
     PilihArmor :
     PilihanArmor = 0;
@@ -134,7 +136,6 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
             case 3 :  
             case 4 :
             case 5 :
-            case 6 :
             TampilkanWeapon(Armor, PilihanArmor, Weight);
             scanf("%d", &PilihanBeli);
             PilihBeliArmor :
@@ -149,14 +150,14 @@ void PilihArmor(itemInventory *player[], int JumlahA, itemsTypes Armor[], int We
                 goto PilihBeliArmor;
                 }
             break;
-            case 7 :
+            case 6 :
             break;
             default : printf("Pilihan salah ! Silahkan masukkan ulang");
             goto PilihArmor;
         }
 }
 
-int MainSHOP(itemInventory *player[], itemsTypes Weapon[], itemsTypes Armor[], int JumlahW, int JumlahA, int Weight){
+int MainSHOP(itemInventory *player, itemsTypes Weapon[], itemsTypes Armor[], int JumlahW, int JumlahA, int Weight){
     int PilihanArmorWeapon, NomorData = 0;
     ShopMenu :
         printf(" +-------------------------------------------------+\n");
