@@ -35,22 +35,27 @@ void viewInventory(itemInventory *player) {
         return;
     }
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
-    
-    
-    for(int i = 0; i < player->numberOfItems; i++) {
-        
-        if(player->items[i].Kode == 0) {
-            printf("%-20s %-10s %-20.2fDPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
-        }
-        else if(player->items[i].Kode == 1) {
-            printf("%-20s %-10s %-20.2fHP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-        }
-        else {
-            printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-        }
+printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+printf("----------------------------------------------------------------------------------------------------------\n");
+
+for(int i = 0; i < player->numberOfItems; i++) {
+    char attributeString[20]; 
+    if(player->items[i].Kode == 0) { 
+        snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+    } else if(player->items[i].Kode == 1) { 
+        snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+    } else { 
+        snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
     }
+
+    printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+           player->items[i].name, 
+           player->items[i].type, 
+           attributeString, 
+           player->items[i].weights, 
+           player->items[i].price, 
+           player->items[i].description);
+}
 
     printf("1. Sort Items\n2.Search for Items\n3.Back To Main Menu\nPilihan: "); scanf("%d", &pilihan); system("cls");
 
@@ -257,23 +262,30 @@ void searchingNama(itemInventory* player, char* namaItem) {
 
     string_to_lower(namaItem);
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
-
+    printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+    printf("----------------------------------------------------------------------------------------------------------\n");
     for(int i = 0; i < player->numberOfItems; i++) {
         strcpy(namaItemLower, player->items[i].name);
         string_to_lower(namaItemLower);
 
         if(strstr(namaItemLower, namaItem) != NULL) {
-            if(strcmp(player->items[i].type, "Weapon") == 0) {
-                printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+            char attributeString[20]; 
+            if(player->items[i].Kode == 0) { 
+                snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+            } else if(player->items[i].Kode == 1) { 
+                snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+            } else { 
+                snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
             }
-            else if(strcmp(player->items[i].type, "Armor") == 0) {
-                printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-            }
-            else {
-                printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-            }
+
+    
+            printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                player->items[i].name, 
+                player->items[i].type, 
+                attributeString, 
+                player->items[i].weights, 
+                player->items[i].price, 
+                player->items[i].description);
         }
     } 
 
@@ -282,58 +294,84 @@ void searchingNama(itemInventory* player, char* namaItem) {
 
 void searchingTipe(itemInventory* player, int pilihan) {
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
+    printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+    printf("----------------------------------------------------------------------------------------------------------\n");
 
     if(pilihan == 1) {
         for(int i = 0; i < player->numberOfItems; i++) {
             if(strcmp(player->items[i].type, "Weapon") == 0) {
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
             }
         }
     }
 
     
-    if(pilihan == 2) {
+    else if(pilihan == 2) {
         for(int i = 0; i < player->numberOfItems; i++) {
             if(strcmp(player->items[i].type, "Armor") == 0) {
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
             }
         }
     }
 
     
-    if(pilihan == 3) {
+    else if(pilihan == 3) {
         for(int i = 0; i < player->numberOfItems; i++) {
             if(strcmp(player->items[i].type, "Other") == 0) {
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
             }
         }
     }
+
+    printf("Press Any Button to Continue!"); getch(); system("cls");
 }
 
 int searchDPS(itemInventory* player) {
@@ -343,27 +381,37 @@ int searchDPS(itemInventory* player) {
         printf("Masukkan Batas Atas: "); scanf("%f", &batasAtas);
         printf("Masukkan Batas Bawah: "); scanf("%f", &batasBawah);
 
-        if(batasAtas > batasBawah) {
+        if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
     } while(batasAtas > batasBawah);
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
+    printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+    printf("----------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < player->numberOfItems; i++){
         if(strcmp(player->items[i].type, "Weapon") == 1 && player->items[i].dps >= batasBawah && player->items[i].dps <= batasAtas){
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
         }
     }
+
+    printf("Press Any Button to Continue!"); getch(); system("cls");
 
 }
 
@@ -374,27 +422,37 @@ int searchDurability(itemInventory* player) {
         printf("Masukkan Batas Atas: "); scanf("%f", &batasAtas);
         printf("Masukkan Batas Bawah: "); scanf("%f", &batasBawah);
 
-        if(batasAtas > batasBawah) {
+        if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
     } while(batasAtas > batasBawah);
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
+    printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+    printf("----------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < player->numberOfItems; i++){
         if(strcmp(player->items[i].type, "Armor") == 1 && player->items[i].dps >= batasBawah && player->items[i].dps <= batasAtas){
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
         }
     }
+
+    printf("Press Any Button to Continue!"); getch(); system("cls");
 }
 
 int searchBerat(itemInventory* player) {
@@ -404,27 +462,37 @@ int searchBerat(itemInventory* player) {
         printf("Masukkan Batas Atas: "); scanf("%f", &batasAtas);
         printf("Masukkan Batas Bawah: "); scanf("%f", &batasBawah);
 
-        if(batasAtas > batasBawah) {
+        if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
     } while(batasAtas > batasBawah);
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
+    printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+    printf("----------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < player->numberOfItems; i++){
         if(player->items[i].weights >= batasBawah && player->items[i].weights <= batasAtas){
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
         }
     }
+
+    printf("Press Any Button to Continue!"); getch(); system("cls");
 }
 
 int searchHarga(itemInventory* player) {
@@ -434,27 +502,37 @@ int searchHarga(itemInventory* player) {
         printf("Masukkan Batas Atas: "); scanf("%f", &batasAtas);
         printf("Masukkan Batas Bawah: "); scanf("%f", &batasBawah);
 
-        if(batasAtas > batasBawah) {
+        if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
     } while(batasAtas > batasBawah);
 
-    printf("%-20s %-10s %-20s %-50s\n", "Name", "Type", "Attribute", "Description");
-    printf("--------------------------------------------------------------------------------\n");
+    printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
+    printf("----------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < player->numberOfItems; i++){
         if(player->items[i].price >= batasBawah && player->items[i].price <= batasAtas){
-                if(strcmp(player->items[i].type, "Weapon") == 0) {
-                    printf("%-20s %-10s %-20.2f DPS %-50s\n", player->items[i].name, "Weapon", player->items[i].dps, player->items[i].description);
+                char attributeString[20]; 
+                if(player->items[i].Kode == 0) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f DPS", player->items[i].dps);
+                } else if(player->items[i].Kode == 1) { 
+                    snprintf(attributeString, sizeof(attributeString), "%.2f HP", player->items[i].durability);
+                } else { 
+                    snprintf(attributeString, sizeof(attributeString), "%s", "N/A");
                 }
-                else if(strcmp(player->items[i].type, "Armor") == 0) {
-                    printf("%-20s %-10s %-20.2f HP %-50s\n", player->items[i].name, "Armor", player->items[i].durability, player->items[i].description);
-                }
-                else {
-                    printf("%-20s %-10s %-20.2f S %-50s\n", player->items[i].name, "Other", "N/A", player->items[i].description);
-                }
+
+        
+                printf("%-20s %-10s %-15s %-10.2f %-10.2f %-50s\n", 
+                    player->items[i].name, 
+                    player->items[i].type, 
+                    attributeString, 
+                    player->items[i].weights, 
+                    player->items[i].price, 
+                    player->items[i].description);
         }
     }
+
+    printf("Press Any Button to Continue!"); getch(); system("cls");
 }
 
 void searchingInventory(itemInventory* player) {
@@ -484,7 +562,8 @@ void searchingInventory(itemInventory* player) {
       switch(pilihan) {
         case 1 : 
         printf("Masukkan nama item: "); scanf(" %[^\n]", namaItem);
-        searchingNama(player, namaItem); 
+        searchingNama(player, namaItem);
+        getch();
         break;
 
 
@@ -503,11 +582,11 @@ void searchingInventory(itemInventory* player) {
         printf("Masukkkan Pilihan: "); scanf("%d", &pilihanType);
 
         switch(pilihanType) {
-            case 1 : system("cls"); searchingTipe(player, 1); system("cls"); break;
+            case 1 : system("cls"); searchingTipe(player, 1); getch(); system("cls"); break;
 
-            case 2 : system("cls"); searchingTipe(player, 2); system("cls"); break;
+            case 2 : system("cls"); searchingTipe(player, 2); getch(); system("cls"); break;
 
-            case 3 : system("cls"); searchingTipe(player, 3); system("cls"); break;
+            case 3 : system("cls"); searchingTipe(player, 3); getch(); system("cls"); break;
         }
 
         break;
@@ -525,17 +604,17 @@ void searchingInventory(itemInventory* player) {
         printf("Masukkkan Pilihan: "); scanf("%d", &pilihanType);
 
         switch(pilihanType) {
-            case 1 : system("cls"); searchDPS(player); system("cls"); break;
+            case 1 : system("cls"); searchDPS(player); getch(); system("cls"); break;
 
-            case 2 : system("cls"); searchDurability(player); system("cls"); break;
+            case 2 : system("cls"); searchDurability(player); getch(); system("cls"); break;
 
         }
 
         break; 
 
-        case 4 : system("cls"); searchBerat(player); system("cls"); break;
+        case 4 : system("cls"); searchBerat(player); getch(); system("cls"); break;
 
-        case 5 : system("cls"); searchHarga(player); system("cls"); break;
+        case 5 : system("cls"); searchHarga(player); getch(); system("cls"); break;
     }
 
 }

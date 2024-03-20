@@ -8,6 +8,7 @@
         "conio.h": "c",
         "mainshop.h": "c",
         "stdio.h": "c",
-        "membacasavefileplayer": "c"
+        "membacasavefileplayer": "c",
+        "stdlib.h": "c"
     }
 }

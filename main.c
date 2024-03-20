@@ -14,9 +14,10 @@ int main() {
     itemsTypes *Armor =(itemsTypes*)malloc(sizeof(itemsTypes));
     player->items = NULL;
     player->numberOfItems = 0;
-    player->carryLoad = 150;
     printf("Masukkan Jumlah Uang Anda : ");
     scanf("%f", &player->money);
+    printf("Masukkan Carry Load Player: ");
+    scanf("%f", &player->carryLoad);
     system("cls");
 
     mainIsiShop(&Weapon, &Armor, &JumlahW, &JumlahA);

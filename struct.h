@@ -14,7 +14,7 @@ typedef struct {
 
 typedef struct {
     float money;
-    int carryLoad;
+    float carryLoad;
     int numberOfItems;
     itemsTypes *items; 
 }itemInventory;
