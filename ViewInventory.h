@@ -204,7 +204,7 @@ void sortirHargaItem(itemInventory* player, int urutan) {
     else {
         for(int i = 0; i < player->numberOfItems; i++) {
             for(int j = 0; j < player->numberOfItems - 1 -i; j++) { 
-                if(player->items[j].price > player->items[j + 1].price) {
+                if(player->items[j].price < player->items[j + 1].price) {
                     itemsTypes temp = player->items[j];
                     player->items[j] = player->items[j + 1];
                     player->items[j + 1] = temp;
@@ -384,7 +384,7 @@ int searchDPS(itemInventory* player) {
         if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
-    } while(batasAtas > batasBawah);
+    } while(batasAtas < batasBawah);
 
     printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
     printf("----------------------------------------------------------------------------------------------------------\n");
@@ -425,7 +425,7 @@ int searchDurability(itemInventory* player) {
         if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
-    } while(batasAtas > batasBawah);
+    } while(batasAtas < batasBawah);
 
     printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
     printf("----------------------------------------------------------------------------------------------------------\n");
@@ -465,7 +465,7 @@ int searchBerat(itemInventory* player) {
         if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
-    } while(batasAtas > batasBawah);
+    } while(batasAtas < batasBawah);
 
     printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
     printf("----------------------------------------------------------------------------------------------------------\n");
@@ -505,7 +505,7 @@ int searchHarga(itemInventory* player) {
         if(batasAtas < batasBawah) {
             system("cls"); printf("Batas atas harus diatas batas bawah!"); getch(); system("cls");
         }
-    } while(batasAtas > batasBawah);
+    } while(batasAtas < batasBawah);
 
     printf("%-20s %-10s %-15s %-10s %-10s %-50s\n", "Name", "Type", "Attribute", "Weights", "Price", "Description");
     printf("----------------------------------------------------------------------------------------------------------\n");
