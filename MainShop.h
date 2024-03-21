@@ -27,6 +27,7 @@ void MasukkanDataWeapon(itemInventory *player, itemsTypes Weapon[], int *Weight,
     *Weight += Beban;
     player->money -= Harga;
     player->numberOfItems++;
+    player->carryLoad -=Beban;
     (*NomorData)++;
 }
 
@@ -49,7 +50,7 @@ void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[], int *W
         system("cls");
 
         // Error Handling jika beban melebihi dari beban maksimum atau uang kurang dari 100
-        if(*Weight > player->carryLoad){
+        if(player->carryLoad < 2){
             return;
         }
         else if(player->money < 100){
@@ -77,7 +78,7 @@ void PilihWeapon(itemInventory *player, int JumlahW, itemsTypes Weapon[], int *W
         printf(" |  7  | Back To Shop Menu                         |\n");
         printf(" +-----+-------------------------------------------+\n");
         printf("Uang sekarang : %.2f\n", player->money);
-        printf("Beban yang sisa sekarang : %.2f\n", player->carryLoad - *Weight);
+        printf("Beban yang sisa sekarang : %.2f\n", player->carryLoad);
 
         // Memilih Pilihan Weapon
         scanf("%d", &PilihanWeapon);
@@ -139,6 +140,7 @@ void MasukkanDataArmor(itemInventory *player, itemsTypes Armor[], int *Weight, i
     *Weight += Beban;
     player->money -= Harga;
     player->numberOfItems++;
+    player->carryLoad -=Beban;
     NomorData++;
 }
 
@@ -149,7 +151,7 @@ void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[], int *Wei
         system("cls");
 
         // Error Handling jika beban melebihi dari beban maksimum atau uang kurang dari 100
-        if(*Weight > player->carryLoad){
+        if(player->carryLoad < 2){
             return;
         }
         else if(player->money < 100){
@@ -175,7 +177,7 @@ void PilihArmor(itemInventory *player, int JumlahA, itemsTypes Armor[], int *Wei
         printf(" |  6  | Back To Shop Menu                         |\n");
         printf(" +-----+-------------------------------------------+\n");
         printf("Uang sekarang : %.2f\n", player->money);
-        printf("Beban yang sisa sekarang : %.2f\n", player->carryLoad - *Weight);
+        printf("Beban yang sisa sekarang : %.2f\n", player->carryLoad);
 
         // Memilih Pilihan Armor
         scanf("%d", &PilihanArmor);
@@ -208,7 +210,7 @@ int MainSHOP(itemInventory *player, itemsTypes Weapon[], itemsTypes Armor[], int
         system("cls");
 
         // Error Handling jika beban melebihi dari beban maksimum atau uang kurang dari 100
-        if(Weight > player->carryLoad){
+        if(player->carryLoad < 2){
             printf("Beban melebihi maxload !");
             getch();
             break;
